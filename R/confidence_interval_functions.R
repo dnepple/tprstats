@@ -16,9 +16,9 @@ CIcoefH <- function(linmod, alpha = 0.05) {
     tcrit <- stats::qt(1 - alpha/2, df)
     lci <- coefs - robust.se * tcrit
     uci <- coefs + robust.se * tcrit
-    ourci <- cbind(coefs, lci, uci)
+    ourci <- round(cbind(coefs, lci, uci), digits = 6)
     confidence_bounds <- (1 - alpha) * 100
-    cat("Coefficients and Heteroskedasticity Robust", confidence_bounds, "% Confidence Bounds")
+    cat("Coefficients and Heteroskedasticity Robust", confidence_bounds, "% Confidence Bounds\n")
     print(ourci)
 }
 
@@ -41,8 +41,8 @@ CIcoefHAC <- function(linmod, alpha = 0.05) {
     tcrit <- stats::qt(1 - alpha/2, df)
     lci <- coefs - robust.se * tcrit
     uci <- coefs + robust.se * tcrit
-    ourci <- cbind(coefs, lci, uci)
+    ourci <- round(cbind(coefs, lci, uci), digits = 6)
     confidence_bounds <- (1 - alpha) * 100
-    cat("Coefficients and HAC Robust", confidence_bounds, "% Confidence Bounds")
+    cat("Coefficients and HAC Robust", confidence_bounds, "% Confidence Bounds\n")
     print(ourci)
 }
