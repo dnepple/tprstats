@@ -99,6 +99,9 @@ summaryArima <- function(arima_mod) {
 #' @export
 
 summaryStats = function(.data){
+    .data = .data %>%
+        select_if(is.numeric)
+
     Mean=round(sapply(.data,mean),4)
     Stdev=round(sapply(.data,stats::sd),4)
     Min=round(sapply(.data,min),4)
