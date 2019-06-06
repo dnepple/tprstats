@@ -90,3 +90,20 @@ summaryArima <- function(arima_mod) {
     print(cbind(Rsq, log_likelihood, akaike, std_error))
     cat("\n Regression with Autoregressive Errors")
 }
+
+#' Summary Statistics
+#'
+#' Returns mean, median, max, min and std. deviation for each variable in the data.
+#'
+#' @param .data The data.
+#' @export
+
+summaryStats = function(.data){
+    Mean=round(sapply(.data,mean),4)
+    Stdev=round(sapply(.data,stats::sd),4)
+    Min=round(sapply(.data,min),4)
+    Median=round(sapply(.data,stats::median),4)
+    Max=round(sapply(.data,max),4)
+    sumst=rbind(Mean,Median,Max,Min,Stdev)
+    sumst
+}
