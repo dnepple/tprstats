@@ -45,8 +45,6 @@ summaryHAC <- function(model) {
     sumry$coefficients <- table
     p <- nrow(table)
     hyp <- cbind(0, diag(p - 1))
-    sumry$fstatistic[1] <- car::linearHypothesis(model, hyp, white.adjust = FALSE)[2,
-        "F"]
 
     print(sumry, signif.stars = FALSE)
     cat("Note: Newey-West standard errors")
