@@ -19,12 +19,9 @@ summaryH <- function(model) {
     sumry$coefficients <- table
     p <- nrow(table)
     hyp <- cbind(0, diag(p - 1))
-    sumry$fstatistic[1] <- car::linearHypothesis(model, hyp, white.adjust = type)[2,
-        "F"]
 
     print(sumry, signif.stars = FALSE)
-    cat("Note: Heteroscedasticity-consistent standard errors using adjustment",
-        type, "\n")
+    cat("Note: Heteroscedasticity-consistent standard errors")
 
 }
 
