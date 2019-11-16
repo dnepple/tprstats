@@ -6,9 +6,9 @@
 #'
 #' @export
 
-setup_tprstats = function(suppress = TRUE){
+setup = function(suppress = TRUE){
 
-  packages<-c("pwr", "ISLR", "plm", "stargazer", "DAAG")
+  packages<-c("pwr", "ISLR", "plm", "stargazer", "DAAG","nlme", "pwrAB","scales","ggplot2","readxl","plot3D", "margins", "forecast", "lift","tidyverse","StatMeasures","MASS","e1071","OOR","rgenoud","fitdistrplus","fastDummies")
 
   if(suppress)
     suppressWarnings(check.packages(packages))
