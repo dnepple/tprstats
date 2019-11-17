@@ -4,11 +4,11 @@
 \alias{setup}
 \title{tprstats setup}
 \usage{
-setup(suppress = TRUE)
+setup(load = TRUE)
 }
 \arguments{
-\item{suppress}{Suppresses warnings for students by default. Suppress can be set to false for troubleshooting.}
+\item{load}{Determines whether packages should be loaded. Defaults to TRUE.}
 }
 \description{
-Installs course packages not already installed as tprstats dependencies.
+Installs additional course packages not already installed as tprstats dependencies. Loads these packages if load = TRUE.
 }
