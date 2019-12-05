@@ -12,7 +12,7 @@
 
 hist_CI <- function(.data, alpha, title, xlabel, breaks = 20) {
   graphics::hist(.data,
-    breaks = breaks, main = "Customer Purchases",
+    breaks = breaks, main = title,
     xlab = xlabel, col = "light blue"
   )
 
