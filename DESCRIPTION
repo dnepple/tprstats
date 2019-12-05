@@ -15,5 +15,8 @@ Imports:
     stats,
     graphics,
     lmtest,
-    glmnet
+    glmnet,
+    magrittr,
+    utils,
+    dplyr
 Suggests: plot3D

@@ -16,10 +16,10 @@ plotActualFitted = function(linmod, MyData, col_name){
   Upper=Pred_and_PI[,3]
   ymax=max(Upper)
   ymin=min(Lower)
-  plot(Y~Observation,ylim=c(ymin,ymax),pch=20,
+  graphics::plot(Y~Observation,ylim=c(ymin,ymax),pch=20,
        main="Actual (black), Predicted (red), and 95% PI (blue)")
-  lines(Y~Observation)
-  lines(Predicted~Observation,col="red")
-  lines(Upper~Observation,col="blue")
-  lines(Lower~Observation,col="blue")
+  graphics::lines(Y~Observation)
+  graphics::lines(Predicted~Observation,col="red")
+  graphics::lines(Upper~Observation,col="blue")
+  graphics::lines(Lower~Observation,col="blue")
 }

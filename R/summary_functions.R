@@ -95,7 +95,7 @@ summaryArima <- function(arima_mod) {
 
 summaryStats = function(.data){
     .data = .data %>%
-        select_if(is.numeric)
+        dplyr::select_if(is.numeric)
 
     Mean=round(sapply(.data,mean),4)
     Stdev=round(sapply(.data,stats::sd),4)
