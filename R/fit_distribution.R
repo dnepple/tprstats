@@ -6,7 +6,7 @@
 #'
 #' @export
 fit_distribution <- function(.data) {
-  if(is.na(.data)){
+  if (is.na(.data)) {
     warning("Data has missing values. These values will be omitted.")
   }
   .data <- as.numeric(stats::na.omit(.data))
@@ -146,16 +146,16 @@ make_histogram <- function(.data, dist) {
 #' @return List of the fitted distribution parameters.
 #' @export
 fitdist_exponential <- function(my_data) {
-  rate_scale=1
-  if (max(my_data)>100){
-    rate_scale=max(.1*my_data)
+  rate_scale <- 1
+  if (max(my_data) > 100) {
+    rate_scale <- max(.1 * my_data)
   }
-  my_scaled_data=my_data/rate_scale
-  fitted_e=fitdistrplus::fitdist(my_scaled_data, "exp")
-  fitted_e$estimate["rate"]=fitted_e$estimate["rate"]/rate_scale
-  fitted_e$loglik=sum(log(stats::dexp(my_data,rate=fitted_e$estimate["rate"],log=FALSE)))
+  my_scaled_data <- my_data / rate_scale
+  fitted_e <- fitdistrplus::fitdist(my_scaled_data, "exp")
+  fitted_e$estimate["rate"] <- fitted_e$estimate["rate"] / rate_scale
+  fitted_e$loglik <- sum(log(stats::dexp(my_data, rate = fitted_e$estimate["rate"], log = FALSE)))
   num_parameters <- 1
-  fitted_e$aic=2*num_parameters-2*fitted_e$loglik
+  fitted_e$aic <- 2 * num_parameters - 2 * fitted_e$loglik
   return(fitted_e)
 }
 
@@ -169,15 +169,15 @@ fitdist_exponential <- function(my_data) {
 #' @return List of the fitted distribution parameters.
 #' @export
 fitdist_gamma <- function(my_data) {
-  rate_scale=1
-  if (max(my_data)>100){
-    rate_scale=max(.1*my_data)
+  rate_scale <- 1
+  if (max(my_data) > 100) {
+    rate_scale <- max(.1 * my_data)
   }
-  my_scaled_data=my_data/rate_scale
-  fitted_g=fitdistrplus::fitdist(my_scaled_data, "gamma")
-  fitted_g$estimate["rate"]=fitted_g$estimate["rate"]/rate_scale
-  fitted_g$loglik=sum(log(stats::dgamma(my_data,shape=fitted_g$estimate["shape"],rate=fitted_g$estimate["rate"],log=FALSE)))
-  fitted_g$aic=2*2-2*fitted_g$loglik
+  my_scaled_data <- my_data / rate_scale
+  fitted_g <- fitdistrplus::fitdist(my_scaled_data, "gamma")
+  fitted_g$estimate["rate"] <- fitted_g$estimate["rate"] / rate_scale
+  fitted_g$loglik <- sum(log(stats::dgamma(my_data, shape = fitted_g$estimate["shape"], rate = fitted_g$estimate["rate"], log = FALSE)))
+  fitted_g$aic <- 2 * 2 - 2 * fitted_g$loglik
   return(fitted_g)
 }
 
