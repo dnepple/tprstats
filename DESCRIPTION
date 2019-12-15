@@ -18,5 +18,10 @@ Imports:
     glmnet,
     magrittr,
     utils,
-    dplyr
+    dplyr,
+    MASS,
+    alabama,
+    fitdistrplus,
+    rlist,
+    sn
 Suggests: plot3D
