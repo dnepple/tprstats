@@ -7,7 +7,7 @@
 #' @export
 fit_distribution <- function(.data) {
   if(is.na(.data)){
-    print("Data has missing values. These values will be omitted.")
+    warning("Data has missing values. These values will be omitted.")
   }
   .data <- as.numeric(stats::na.omit(.data))
   dist <- get_recommended_distribution(.data)
@@ -28,7 +28,7 @@ get_recommended_distribution <- function(.data) {
   dists <- list(
     fitdistrplus::fitdist(.data, "norm"),
     fitdist_uniform(.data),
-    fitdist_t(.data),
+    suppressWarnings(fitdist_t(.data)),
     fitdist_skew_normal(.data)
   )
 
