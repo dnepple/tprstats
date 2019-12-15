@@ -28,7 +28,7 @@ get_recommended_distribution <- function(.data) {
   dists <- list(
     fitdistrplus::fitdist(.data, "norm"),
     fitdist_uniform(.data),
-    fitdist_t(.data),
+    suppressWarnings(fitdist_t(.data)),
     fitdist_skew_normal(.data)
   )
 
