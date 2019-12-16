@@ -3,7 +3,7 @@
 #' Fits up to 8 different distrubtions to a set of data and recommends the best-fitting distribution, where best-fitting is considered to be the distribution with the smallest AIC value. Prints the distribution parameters and R instructions for sampling the recommended distribution. Outputs a histogram of the data overlayed by the density function of the recommended distribution.
 #'
 #' @param .data Data.
-#'
+#' @return List of parameters for the recommended distribution.
 #' @export
 fit_distribution <- function(.data) {
   if (is.na(.data)) {
@@ -14,6 +14,7 @@ fit_distribution <- function(.data) {
   print_distribution_parameters(dist)
   print_distribution_instructions(dist)
   make_histogram(.data, dist)
+  return(dist)
 }
 
 #' Recommend Distribution
