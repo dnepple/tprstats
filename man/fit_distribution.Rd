@@ -9,6 +9,9 @@ fit_distribution(.data)
 \arguments{
 \item{.data}{Data.}
 }
+\value{
+List of parameters for the recommended distribution.
+}
 \description{
 Fits up to 8 different distrubtions to a set of data and recommends the best-fitting distribution, where best-fitting is considered to be the distribution with the smallest AIC value. Prints the distribution parameters and R instructions for sampling the recommended distribution. Outputs a histogram of the data overlayed by the density function of the recommended distribution.
 }

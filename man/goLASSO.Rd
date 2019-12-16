@@ -11,6 +11,9 @@ goLASSO(datafile, predDat)
 
 \item{predDat}{Used for prediction.}
 }
+\value{
+List of results.
+}
 \description{
 Performs LASSO regression analysis.
 }
