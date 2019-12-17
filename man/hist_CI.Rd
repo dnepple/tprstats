@@ -4,16 +4,22 @@
 \alias{hist_CI}
 \title{Histogram with Confidence Interval}
 \usage{
-hist_CI(.data, alpha, title, xlabel, breaks = 20)
+hist_CI(
+  .data,
+  alpha,
+  main = "Histogram",
+  xlab = "Data and (1-alpha)\% Confidence Interval",
+  breaks = 20
+)
 }
 \arguments{
 \item{.data}{The data.}
 
-\item{alpha}{Alpha}
+\item{alpha}{Alpha value.}
 
-\item{title}{Graph title.}
+\item{main}{Graph title.}
 
-\item{xlabel}{Graph x label.}
+\item{xlab}{Graph x label.}
 
 \item{breaks}{Histogram breaks. Defaults to 20.}
 }

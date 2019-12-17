@@ -3,9 +3,9 @@
 #' Plots a histogram with confidence interval.
 #'
 #' @param .data The data.
-#' @param alpha Alpha
-#' @param title Graph title.
-#' @param xlabel Graph x label.
+#' @param alpha Alpha value.
+#' @param main Graph title.
+#' @param xlab Graph x label.
 #' @param breaks Histogram breaks. Defaults to 20.
 #'
 #' @export
