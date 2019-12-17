@@ -16,7 +16,7 @@ hist_CI <- function(.data, alpha, main = "Histogram", xlab = "Data and (1-alpha)
     col = "light blue"
   )
 
-  if(is.na(.data)){
+  if(anyNA(.data)){
     print("Data has missing values. Missing values will be omitted.")
     .data <- stats::na.omit(.data)
   }
