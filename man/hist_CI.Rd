@@ -6,7 +6,7 @@
 \usage{
 hist_CI(
   .data,
-  alpha,
+  alpha = 0.1,
   main = "Histogram",
   xlab = "Data and (1-alpha)\% Confidence Interval",
   breaks = 20
@@ -15,7 +15,7 @@ hist_CI(
 \arguments{
 \item{.data}{The data.}
 
-\item{alpha}{Alpha value.}
+\item{alpha}{Alpha value. Defaults to 0.1.}
 
 \item{main}{Graph title.}
 

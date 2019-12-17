@@ -3,14 +3,14 @@
 #' Plots a histogram with confidence interval.
 #'
 #' @param .data The data.
-#' @param alpha Alpha value.
+#' @param alpha Alpha value. Defaults to 0.1.
 #' @param main Graph title.
 #' @param xlab Graph x label.
 #' @param breaks Histogram breaks. Defaults to 20.
 #'
 #' @export
 
-hist_CI <- function(.data, alpha, main = "Histogram", xlab = "Data and (1-alpha)% Confidence Interval", breaks = 20) {
+hist_CI <- function(.data, alpha = .1, main = "Histogram", xlab = "Data and (1-alpha)% Confidence Interval", breaks = 20) {
   graphics::hist(.data,
     breaks = 20, main = main, xlab = xlab,
     col = "light blue"
