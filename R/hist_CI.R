@@ -15,6 +15,11 @@ hist_CI <- function(.data, alpha, main = "Histogram", xlab = "Data and (1-alpha)
     breaks = 20, main = main, xlab = xlab,
     col = "light blue"
   )
+
+  if(is.na(.data)){
+    print("Data has missing values. Missing values will be omitted.")
+    .data <- stats::na.omit(.data)
+  }
   CIlow <- round(stats::quantile(.data, alpha / 2), 2)
   CIhi <- round(stats::quantile(.data, 1 - alpha / 2), 2)
   graphics::abline(v = CIlow, col = "red")
