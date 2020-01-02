@@ -54,7 +54,7 @@ get_recommended_distribution <- function(.data) {
 #'
 #' @param dist List of parameters from the fitted distribution.
 print_distribution_parameters <- function(dist) {
-  cat("Recommended:", dist$distname, "distribution with the folowing parameters:\n")
+  cat("Recommended:", dist$distname, "distribution with the following parameters:\n")
   print(dist$estimate)
 }
 
