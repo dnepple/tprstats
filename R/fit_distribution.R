@@ -26,17 +26,17 @@ get_recommended_distribution <- function(.data) {
   # this function can also return a list of all distribution sorted in ascending order of AIC value
   dists <- list(
     fitdistrplus::fitdist(.data, "norm"),
-    fitdist_uniform(.data),
-    suppressWarnings(fitdist_t(.data)),
-    fitdist_skew_normal(.data)
+    fitdist_parameters_uniform(.data),
+    suppressWarnings(fitdist_parameters_t(.data)),
+    fitdist_parameters_skew_normal(.data)
   )
 
   if (min(.data) > 0) {
     dists_positive <- list(
       fitdistrplus::fitdist(.data, "weibull"),
-      fitdist_gamma(.data),
+      fitdist_parameters_gamma(.data),
       fitdistrplus::fitdist(.data, "lnorm"),
-      fitdist_exponential(.data)
+      fitdist_parameters_exponential(.data)
     )
     dists <- c(dists, dists_positive)
   }
@@ -134,17 +134,16 @@ make_histogram <- function(.data, dist) {
 }
 
 
-# Fit Distributions -------------------------------------------------------
+# Fit Distribution Parameters -------------------------------------------------------
 
-#' Fit Distribution Exponential
+#' Fit Distribution Parameters Exponential
 #'
 #' Fits the exponentional distribution to the given data. Adjusts the scaling for estimation and returns the estimate parameters at the original scaling.
 #'
 #' @param my_data The data.
 #'
 #' @return List of the fitted distribution parameters.
-#' @export
-fitdist_exponential <- function(my_data) {
+fitdist_parameters_exponential <- function(my_data) {
   rate_scale <- 1
   if (max(my_data) > 100) {
     rate_scale <- max(.1 * my_data)
@@ -159,15 +158,14 @@ fitdist_exponential <- function(my_data) {
 }
 
 
-#' Fit Distribution Gamma
+#' Fit Distribution Parameters Gamma
 #'
 #' Fits the uniform distribution to the given data. Adjusts the scaling for estimation and returns the estimate parameters at the original scaling.
 #'
 #' @param my_data The data.
 #'
 #' @return List of the fitted distribution parameters.
-#' @export
-fitdist_gamma <- function(my_data) {
+fitdist_parameters_gamma <- function(my_data) {
   rate_scale <- 1
   if (max(my_data) > 100) {
     rate_scale <- max(.1 * my_data)
@@ -180,15 +178,14 @@ fitdist_gamma <- function(my_data) {
   return(fitted_g)
 }
 
-#' Fit Distribution Uniform
+#' Fit Distribution Parameters Uniform
 #'
 #' Fits the uniform distribution to the given data.
 #'
 #' @param .data The data.
 #'
 #' @return List of parameters from the uniform distribution.
-#' @export
-fitdist_uniform <- function(.data) {
+fitdist_parameters_uniform <- function(.data) {
   fit_u <- fitdistrplus::fitdist(.data, "unif")
   # calculate loglik
   params_u <- data.frame(fit_u[1])
@@ -201,15 +198,14 @@ fitdist_uniform <- function(.data) {
   fit_u
 }
 
-#' Fit Distribution t
+#' Fit Distribution Parameters t
 #'
 #' Fits the t distribution to the given data.
 #'
 #' @param my_data The data.
 #'
 #' @return List of the distribution parameters.
-#' @export
-fitdist_t <- function(my_data) {
+fitdist_parameters_t <- function(my_data) {
   # find t starting values
   mean_mydata <- mean(my_data)
   sd_mydata <- stats::sd(my_data)
@@ -250,15 +246,14 @@ fitdist_t <- function(my_data) {
   return(fitted_t)
 }
 
-#' Fit Distribution Skew Normal
+#' Fit Distribution Parameters Skew Normal
 #'
 #' Fits the skew normal distribution to the data.
 #'
 #' @param my_data The data.
 #'
 #' @return List of distribution parameters.
-#' @export
-fitdist_skew_normal <- function(my_data) {
+fitdist_parameters_skew_normal <- function(my_data) {
   # Initialize variables used in the function
   alpha_exog <- 0
   logl_save <- -1e9
