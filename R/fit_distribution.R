@@ -10,6 +10,7 @@ fit_distribution <- function(.data) {
   }
   .data <- as.numeric(stats::na.omit(.data))
   dist <- get_recommended_distribution(.data)
+  cat("Recommended distribution:", dist$distname, "\n")
   print_distribution_parameters(dist)
   print_distribution_instructions(dist)
   make_histogram(.data, dist)
@@ -54,7 +55,7 @@ get_recommended_distribution <- function(.data) {
 #'
 #' @param dist List of parameters from the fitted distribution.
 print_distribution_parameters <- function(dist) {
-  cat("Recommended:", dist$distname, "distribution with the following parameters:\n")
+  cat("Estimated parameters for the",dist$distname,":\n")
   print(dist$estimate)
 }
 
