@@ -4,11 +4,16 @@
 \alias{fit_distribution}
 \title{Fit Distribution}
 \usage{
-fit_distribution(.data)
+fit_distribution(
+  .data,
+  distname = c("norm", "unif", "t", "snorm", "weibull", "gamma", "lnorm", "exp")
+)
 }
 \arguments{
-\item{.data}{Data.}
+\item{.data}{The data.}
+
+\item{distname}{The distribution name.}
 }
 \description{
-Fits up to 8 different distrubtions to a set of data and recommends the best-fitting distribution, where best-fitting is considered to be the distribution with the smallest AIC value. Prints the distribution parameters and R instructions for sampling the recommended distribution. Outputs a histogram of the data overlayed by the density function of the recommended distribution.
+Fits a distribution to data.The abbreviatinsn for distribution names are: "norm", "unif", "t", "snorm", "weibull", "gamma", "lnorm", "exp"
 }

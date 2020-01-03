@@ -3,6 +3,7 @@
 export("%>%")
 export(CIcoefH)
 export(CIcoefHAC)
+export(best_distribution)
 export(coefCovH)
 export(coefCovHAC)
 export(coefTestH)
