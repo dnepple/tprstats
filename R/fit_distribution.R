@@ -81,7 +81,7 @@ fit_distribution <- function(.data, distname = c("norm", "unif", "t", "snorm", "
   } else if (distname == "t") {
     dist <- suppressWarnings(fitdist_parameters_t(.data))
   } else if (distname == "snorm") {
-    dist <- fitdist_parameters_skew_normal(.data)
+    dist <- suppressWarnings(fitdist_parameters_skew_normal(.data))
   } else if (distname == "weibull") {
     dist <- fitdistrplus::fitdist(.data, "weibull")
   } else if (distname == "gamma") {
