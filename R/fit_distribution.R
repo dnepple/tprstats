@@ -8,7 +8,7 @@
 #' @param .data Data.
 #' @export
 best_distribution <- function(.data) {
-  if (is.na(.data)) {
+  if (anyNA(.data)) {
     print("Data has missing values. These values will be omitted.")
   }
   .data <- as.numeric(stats::na.omit(.data))
@@ -64,7 +64,7 @@ get_recommended_distribution <- function(.data) {
 #'
 #' @export
 fit_distribution <- function(.data, distname = c("norm", "unif", "t", "snorm", "weibull", "gamma", "lnorm", "exp")) {
-  if (is.na(.data)) {
+  if (anyNA(.data)) {
     print("Data has missing values. These values will be omitted.")
   }
   .data <- as.numeric(stats::na.omit(.data))
