@@ -404,7 +404,7 @@ fitdist_parameters_skew_normal <- function(my_data) {
   opt_snorm["loglik"] <- -opt_snorm$value
   num_parameters <- 3
   opt_snorm["aic"] <- 2 * num_parameters - 2 * opt_snorm$loglik
-  opt_snorm$estimate <- c(xi = opt_snorm$par[1], omg = opt_snorm$par[2], tau = opt_snorm$par[3])
+  opt_snorm$estimate <- c(xi = opt_snorm$par[1], omg = opt_snorm$par[2], alpha = opt_snorm$par[3])
   return(opt_snorm)
 }
 
