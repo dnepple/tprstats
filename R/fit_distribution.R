@@ -1,15 +1,19 @@
-#' Fit Distribution
+
+# Best-fitting Distribution -----------------------------------------------
+
+#' Best-fitting Distribution
 #'
 #' Fits up to 8 different distrubtions to a set of data and recommends the best-fitting distribution, where best-fitting is considered to be the distribution with the smallest AIC value. Prints the distribution parameters and R instructions for sampling the recommended distribution. Outputs a histogram of the data overlayed by the density function of the recommended distribution.
 #'
 #' @param .data Data.
 #' @export
-fit_distribution <- function(.data) {
-  if (is.na(.data)) {
+best_distribution <- function(.data) {
+  if (anyNA(.data)) {
     print("Data has missing values. These values will be omitted.")
   }
   .data <- as.numeric(stats::na.omit(.data))
   dist <- get_recommended_distribution(.data)
+  cat("Recommended distribution:", dist$distname, "\n")
   print_distribution_parameters(dist)
   print_distribution_instructions(dist)
   make_histogram(.data, dist)
@@ -26,17 +30,17 @@ get_recommended_distribution <- function(.data) {
   # this function can also return a list of all distribution sorted in ascending order of AIC value
   dists <- list(
     fitdistrplus::fitdist(.data, "norm"),
-    fitdist_uniform(.data),
-    suppressWarnings(fitdist_t(.data)),
-    fitdist_skew_normal(.data)
+    fitdist_parameters_uniform(.data),
+    suppressWarnings(fitdist_parameters_t(.data)),
+    fitdist_parameters_skew_normal(.data)
   )
 
   if (min(.data) > 0) {
     dists_positive <- list(
       fitdistrplus::fitdist(.data, "weibull"),
-      fitdist_gamma(.data),
+      fitdist_parameters_gamma(.data),
       fitdistrplus::fitdist(.data, "lnorm"),
-      fitdist_exponential(.data)
+      fitdist_parameters_exponential(.data)
     )
     dists <- c(dists, dists_positive)
   }
@@ -48,13 +52,63 @@ get_recommended_distribution <- function(.data) {
   min_aic_dist
 }
 
+
+# Fit Distribution to Data --------------------------------------------------------
+
+#' Fit Distribution
+#'
+#' Fits a distribution to data.The abbreviatinsn for distribution names are: "norm", "unif", "t", "snorm", "weibull", "gamma", "lnorm", "exp"
+#'
+#' @param .data The data.
+#' @param distname The distribution name.
+#'
+#' @export
+fit_distribution <- function(.data, distname = c("norm", "unif", "t", "snorm", "weibull", "gamma", "lnorm", "exp")) {
+  if (anyNA(.data)) {
+    print("Data has missing values. These values will be omitted.")
+  }
+  .data <- as.numeric(stats::na.omit(.data))
+
+  positive_only_distributions <- c("weibull", "gamma", "lnorm", "exp")
+  if (min(.data) < 0 & distname %in% positive_only_distributions) {
+    stop("This distribution cannot be fitted to data with negative values.")
+  }
+
+  if (distname == "norm") {
+    dist <- fitdistrplus::fitdist(.data, "norm")
+  } else if (distname == "unif") {
+    dist <- fitdist_parameters_uniform(.data)
+  } else if (distname == "t") {
+    dist <- suppressWarnings(fitdist_parameters_t(.data))
+  } else if (distname == "snorm") {
+    dist <- suppressWarnings(fitdist_parameters_skew_normal(.data))
+  } else if (distname == "weibull") {
+    dist <- fitdistrplus::fitdist(.data, "weibull")
+  } else if (distname == "gamma") {
+    dist <- fitdist_parameters_gamma(.data)
+  } else if (distname == "lnorm") {
+    dist <- fitdistrplus::fitdist(.data, "lnorm")
+  } else if (distname == "exp") {
+    dist <- fitdist_parameters_exponential(.data)
+  } else {
+    stop("Incorrect distribution name.")
+  }
+
+  print_distribution_parameters(dist)
+  print_distribution_instructions(dist)
+  make_histogram(.data, dist)
+}
+
+
+# Print Functions ---------------------------------------------------------
+
 #' Print Distribution Parameters
 #'
 #' Prints the name of the recommended distribution and the distribution parameters.
 #'
 #' @param dist List of parameters from the fitted distribution.
 print_distribution_parameters <- function(dist) {
-  cat("Recommended:", dist$distname, "distribution with the following parameters:\n")
+  cat("Estimated parameters for the",dist$distname,":\n")
   print(dist$estimate)
 }
 
@@ -81,6 +135,8 @@ print_distribution_instructions <- function(dist) {
     print("Command not found.")
   }
 }
+
+# Histogram Function -----------------------------------------------------
 
 #' Make Histogram
 #'
@@ -134,17 +190,16 @@ make_histogram <- function(.data, dist) {
 }
 
 
-# Fit Distributions -------------------------------------------------------
+# Fit Distribution Parameters -------------------------------------------------------
 
-#' Fit Distribution Exponential
+#' Fit Distribution Parameters Exponential
 #'
 #' Fits the exponentional distribution to the given data. Adjusts the scaling for estimation and returns the estimate parameters at the original scaling.
 #'
 #' @param my_data The data.
 #'
 #' @return List of the fitted distribution parameters.
-#' @export
-fitdist_exponential <- function(my_data) {
+fitdist_parameters_exponential <- function(my_data) {
   rate_scale <- 1
   if (max(my_data) > 100) {
     rate_scale <- max(.1 * my_data)
@@ -159,15 +214,14 @@ fitdist_exponential <- function(my_data) {
 }
 
 
-#' Fit Distribution Gamma
+#' Fit Distribution Parameters Gamma
 #'
 #' Fits the uniform distribution to the given data. Adjusts the scaling for estimation and returns the estimate parameters at the original scaling.
 #'
 #' @param my_data The data.
 #'
 #' @return List of the fitted distribution parameters.
-#' @export
-fitdist_gamma <- function(my_data) {
+fitdist_parameters_gamma <- function(my_data) {
   rate_scale <- 1
   if (max(my_data) > 100) {
     rate_scale <- max(.1 * my_data)
@@ -180,15 +234,14 @@ fitdist_gamma <- function(my_data) {
   return(fitted_g)
 }
 
-#' Fit Distribution Uniform
+#' Fit Distribution Parameters Uniform
 #'
 #' Fits the uniform distribution to the given data.
 #'
 #' @param .data The data.
 #'
 #' @return List of parameters from the uniform distribution.
-#' @export
-fitdist_uniform <- function(.data) {
+fitdist_parameters_uniform <- function(.data) {
   fit_u <- fitdistrplus::fitdist(.data, "unif")
   # calculate loglik
   params_u <- data.frame(fit_u[1])
@@ -201,15 +254,14 @@ fitdist_uniform <- function(.data) {
   fit_u
 }
 
-#' Fit Distribution t
+#' Fit Distribution Parameters t
 #'
 #' Fits the t distribution to the given data.
 #'
 #' @param my_data The data.
 #'
 #' @return List of the distribution parameters.
-#' @export
-fitdist_t <- function(my_data) {
+fitdist_parameters_t <- function(my_data) {
   # find t starting values
   mean_mydata <- mean(my_data)
   sd_mydata <- stats::sd(my_data)
@@ -250,15 +302,14 @@ fitdist_t <- function(my_data) {
   return(fitted_t)
 }
 
-#' Fit Distribution Skew Normal
+#' Fit Distribution Parameters Skew Normal
 #'
 #' Fits the skew normal distribution to the data.
 #'
 #' @param my_data The data.
 #'
 #' @return List of distribution parameters.
-#' @export
-fitdist_skew_normal <- function(my_data) {
+fitdist_parameters_skew_normal <- function(my_data) {
   # Initialize variables used in the function
   alpha_exog <- 0
   logl_save <- -1e9
@@ -353,34 +404,34 @@ fitdist_skew_normal <- function(my_data) {
   opt_snorm["loglik"] <- -opt_snorm$value
   num_parameters <- 3
   opt_snorm["aic"] <- 2 * num_parameters - 2 * opt_snorm$loglik
-  opt_snorm$estimate <- c(xi = opt_snorm$par[1], omg = opt_snorm$par[2], tau = opt_snorm$par[3])
+  opt_snorm$estimate <- c(xi = opt_snorm$par[1], omg = opt_snorm$par[2], alpha = opt_snorm$par[3])
   return(opt_snorm)
 }
 
 # Test -----------------------------------------------------------------
 
 
-#' Test fit distributions
+#' Test Best-fitting Distribution
 #'
 #' Tests fit distribution against a variety of generated data.
-test_distributions <- function() {
+test_best_distribution <- function() {
   set.seed(33)
   cat("\nTesting Gamma\n")
-  fit_distribution(stats::rgamma(1000, 6, 2))
+  best_distribution(stats::rgamma(1000, 6, 2))
   cat("\nTesting Weibull\n")
-  fit_distribution(stats::rweibull(1000, 6, 2))
+  best_distribution(stats::rweibull(1000, 6, 2))
   cat("\nTesting lnorm\n")
-  fit_distribution(stats::rlnorm(1000, 2, .5))
+  best_distribution(stats::rlnorm(1000, 2, .5))
   cat("\nTesting exp\n")
-  fit_distribution(stats::rexp(1000, .3))
+  best_distribution(stats::rexp(1000, .3))
   cat("\nTesting norm\n")
-  fit_distribution(stats::rnorm(1000, 2, 3))
+  best_distribution(stats::rnorm(1000, 2, 3))
   cat("\nTesting unif\n")
-  fit_distribution(stats::runif(1000, 2, 4))
+  best_distribution(stats::runif(1000, 2, 4))
   cat("\nTesting t\n")
   t_data <- 2 + 1.2 * stats::rt(1000, 6)
-  fit_distribution(t_data)
+  best_distribution(t_data)
   cat("\nTesting snorm\n")
   snorm_data <- as.numeric(sn::rsn(1000, 32, 20, -5))
-  fit_distribution(snorm_data)
+  best_distribution(snorm_data)
 }
