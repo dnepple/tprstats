@@ -31,7 +31,7 @@ get_recommended_distribution <- function(.data) {
   dists <- list(
     fitdistrplus::fitdist(.data, "norm"),
     fitdist_parameters_uniform(.data),
-    suppressWarnings(fitdist_parameters_t(.data)),
+    fitdist_parameters_t(.data),
     fitdist_parameters_skew_normal(.data)
   )
 
@@ -79,7 +79,7 @@ fit_distribution <- function(.data, distname = c("norm", "unif", "t", "snorm", "
   } else if (distname == "unif") {
     dist <- fitdist_parameters_uniform(.data)
   } else if (distname == "t") {
-    dist <- suppressWarnings(fitdist_parameters_t(.data))
+    dist <- fitdist_parameters_t(.data)
   } else if (distname == "snorm") {
     dist <- fitdist_parameters_skew_normal(.data)
   } else if (distname == "weibull") {
