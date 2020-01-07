@@ -326,9 +326,8 @@ fitdist_parameters_skew_normal <- function(my_data) {
     }
     my_term1 <- stats::dnorm((my_data - x[1]) / x[2])
     my_term2 <- stats::pnorm(x[3] * (my_data - x[1]) / x[2])
-    my_log_pdf <- log((2 / x[2]) * my_term1 * my_term2)
+    my_log_pdf <- suppressWarnings(log((2 / x[2]) * my_term1 * my_term2))
     my_LogL <- sum(my_log_pdf)
-    #  print(x)
     return(-my_LogL)
   }
 
