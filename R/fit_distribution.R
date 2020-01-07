@@ -321,12 +321,13 @@ fitdist_parameters_skew_normal <- function(my_data) {
   # Define likelihood function. Optimizer auglag minimizes, so this function
   # returns the negative of the logarithm of the likelihood function.
   SkewNormal <- function(x) {
+    x[2] = abs(x[2])
     if (ISkSt == 1) {
       x[3] <- alpha_exog
     }
     my_term1 <- stats::dnorm((my_data - x[1]) / x[2])
     my_term2 <- stats::pnorm(x[3] * (my_data - x[1]) / x[2])
-    my_log_pdf <- suppressWarnings(log((2 / x[2]) * my_term1 * my_term2))
+    my_log_pdf <- log((2 / x[2]) * my_term1 * my_term2)
     my_LogL <- sum(my_log_pdf)
     return(-my_LogL)
   }
