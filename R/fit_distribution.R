@@ -1,13 +1,13 @@
 
 # Best-fitting Distribution -----------------------------------------------
 
-#' Best-fitting Distribution
+#' Select Distribution
 #'
 #' Fits up to 8 different distrubtions to a set of data and recommends the best-fitting distribution, where best-fitting is considered to be the distribution with the smallest AIC value. Prints the distribution parameters and R instructions for sampling the recommended distribution. Outputs a histogram of the data overlayed by the density function of the recommended distribution.
 #'
 #' @param .data Data.
 #' @export
-best_distribution <- function(.data) {
+select_distribution <- function(.data) {
   if (anyNA(.data)) {
     print("Data has missing values. These values will be omitted.")
   }
@@ -326,9 +326,8 @@ fitdist_parameters_skew_normal <- function(my_data) {
     }
     my_term1 <- stats::dnorm((my_data - x[1]) / x[2])
     my_term2 <- stats::pnorm(x[3] * (my_data - x[1]) / x[2])
-    my_log_pdf <- log((2 / x[2]) * my_term1 * my_term2)
+    my_log_pdf <- suppressWarnings(log((2 / x[2]) * my_term1 * my_term2))
     my_LogL <- sum(my_log_pdf)
-    #  print(x)
     return(-my_LogL)
   }
 
@@ -414,24 +413,24 @@ fitdist_parameters_skew_normal <- function(my_data) {
 #' Test Best-fitting Distribution
 #'
 #' Tests fit distribution against a variety of generated data.
-test_best_distribution <- function() {
+test_select_distribution <- function() {
   set.seed(33)
   cat("\nTesting Gamma\n")
-  best_distribution(stats::rgamma(1000, 6, 2))
+  select_distribution(stats::rgamma(1000, 6, 2))
   cat("\nTesting Weibull\n")
-  best_distribution(stats::rweibull(1000, 6, 2))
+  select_distribution(stats::rweibull(1000, 6, 2))
   cat("\nTesting lnorm\n")
-  best_distribution(stats::rlnorm(1000, 2, .5))
+  select_distribution(stats::rlnorm(1000, 2, .5))
   cat("\nTesting exp\n")
-  best_distribution(stats::rexp(1000, .3))
+  select_distribution(stats::rexp(1000, .3))
   cat("\nTesting norm\n")
-  best_distribution(stats::rnorm(1000, 2, 3))
+  select_distribution(stats::rnorm(1000, 2, 3))
   cat("\nTesting unif\n")
-  best_distribution(stats::runif(1000, 2, 4))
+  select_distribution(stats::runif(1000, 2, 4))
   cat("\nTesting t\n")
   t_data <- 2 + 1.2 * stats::rt(1000, 6)
-  best_distribution(t_data)
+  select_distribution(t_data)
   cat("\nTesting snorm\n")
   snorm_data <- as.numeric(sn::rsn(1000, 32, 20, -5))
-  best_distribution(snorm_data)
+  select_distribution(snorm_data)
 }
