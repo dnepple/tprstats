@@ -9,6 +9,9 @@ summaryH(model)
 \arguments{
 \item{model}{The linear regression model.}
 }
+\value{
+sumry Returns a summary.lm object with Heteroscedasticity-consistent standard errors
+}
 \description{
 This function displays regression results with standard errors adjusted for possible presence of heteroskedasticity using the method developed by White. This method is appropriate for cross-section data.
 }
