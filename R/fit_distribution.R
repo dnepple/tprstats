@@ -57,7 +57,7 @@ get_recommended_distribution <- function(.data) {
 
 #' Fit Distribution
 #'
-#' Fits a distribution to data.The abbreviatinsn for distribution names are: "norm", "unif", "t", "snorm", "weibull", "gamma", "lnorm", "exp"
+#' Fits a distribution to data.The abbreviations for distribution names are: "norm", "unif", "t", "snorm", "weibull", "gamma", "lnorm", "exp"
 #'
 #' @param .data The data.
 #' @param distname The distribution name.
@@ -80,6 +80,10 @@ fit_distribution <- function(.data, distname = c("norm", "unif", "t", "snorm", "
     dist <- fitdist_parameters_uniform(.data)
   } else if (distname == "t") {
     dist <- fitdist_parameters_t(.data)
+    dist <- dplyr::rename(dist,
+      m = .data$mean,
+      s = .data$sd
+    )
   } else if (distname == "snorm") {
     dist <- fitdist_parameters_skew_normal(.data)
   } else if (distname == "weibull") {
@@ -108,7 +112,7 @@ fit_distribution <- function(.data, distname = c("norm", "unif", "t", "snorm", "
 #'
 #' @param dist List of parameters from the fitted distribution.
 print_distribution_parameters <- function(dist) {
-  cat("Estimated parameters for the",dist$distname,":\n")
+  cat("Estimated parameters for the", dist$distname, ":\n")
   print(dist$estimate)
 }
 
@@ -321,7 +325,7 @@ fitdist_parameters_skew_normal <- function(my_data) {
   # Define likelihood function. Optimizer auglag minimizes, so this function
   # returns the negative of the logarithm of the likelihood function.
   SkewNormal <- function(x) {
-    x[2] = abs(x[2])
+    x[2] <- abs(x[2])
     if (ISkSt == 1) {
       x[3] <- alpha_exog
     }

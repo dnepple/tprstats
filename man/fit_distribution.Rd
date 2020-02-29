@@ -15,5 +15,5 @@ fit_distribution(
 \item{distname}{The distribution name.}
 }
 \description{
-Fits a distribution to data.The abbreviatinsn for distribution names are: "norm", "unif", "t", "snorm", "weibull", "gamma", "lnorm", "exp"
+Fits a distribution to data.The abbreviations for distribution names are: "norm", "unif", "t", "snorm", "weibull", "gamma", "lnorm", "exp"
 }
