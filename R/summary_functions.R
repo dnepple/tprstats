@@ -3,7 +3,6 @@
 #' This function displays regression results with standard errors adjusted for possible presence of heteroskedasticity using the method developed by White. This method is appropriate for cross-section data.
 #'
 #'@param model The linear regression model.
-#'@return sumry Returns a summary.lm object with Heteroscedasticity-consistent standard errors
 #'@export
 
 summaryH <- function(model) {
@@ -18,12 +17,12 @@ summaryH <- function(model) {
         lower.tail = FALSE)
 
     sumry$coefficients <- table
-    # p <- nrow(table)
-    # hyp <- cbind(0, diag(p - 1))
+    p <- nrow(table)
+    hyp <- cbind(0, diag(p - 1))
 
-    # print(sumry, signif.stars = FALSE)
-    message("Generating summary with Heteroscedasticity-consistent standard errors")
-    return(sumry)
+    print(sumry, signif.stars = FALSE)
+    cat("Note: Heteroscedasticity-consistent standard errors")
+
 }
 
 #' Summary of Regression (Time Series Data)
