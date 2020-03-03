@@ -15,7 +15,7 @@ plotObjectiveFunction <- function(fn, from, to) {
     mean(fn(x))
   })
 
-  graphics::plot(results$xvar, results$yvar, xlab = "x", ylab = "y")
+  graphics::plot(yvar~xvar, data = results, xlab = "x", ylab = "y", pch = 16)
 
   return(results)
 }
