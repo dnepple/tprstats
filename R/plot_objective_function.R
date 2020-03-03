@@ -1,8 +1,8 @@
 #' Plot Objective Function
 #'
-#' Plots x to mean of the input function over the input range.
+#' Plots as a function of x the mean of a simulated sample of objective function values.
 #'
-#' @param fn A function.
+#' @param fn Objective function.
 #' @param from Minimum x value.
 #' @param to Maximum x value.
 #'

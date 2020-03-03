@@ -7,7 +7,7 @@
 plotObjectiveFunction(fn, from, to)
 }
 \arguments{
-\item{fn}{A function.}
+\item{fn}{Objective function.}
 
 \item{from}{Minimum x value.}
 
@@ -17,5 +17,5 @@ plotObjectiveFunction(fn, from, to)
 results A table.
 }
 \description{
-Plots x to mean of the input function over the input range.
+Plots as a function of x the mean of a simulated sample of objective function values.
 }
