@@ -16,3 +16,14 @@ setup <- function(load = TRUE) {
     sapply(pkg, require, character.only = TRUE)
   }
 }
+
+#' Deprecated Setup for tprstats
+#'
+#' This command is now identical to the tprstats::setup() command. This command just calls tprstats::setup().
+#'
+#' @param load Indicates of package should be loaded (load = TRUE) or if setup should just check the packages have been installed (load = FALSE)
+#' @export
+#'
+setup_tprstats <- function(load = TRUE) {
+  tprstats::setup(load)
+}
