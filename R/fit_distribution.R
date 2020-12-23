@@ -80,10 +80,6 @@ fit_distribution <- function(.data, distname = c("norm", "unif", "t", "snorm", "
     dist <- fitdist_parameters_uniform(.data)
   } else if (distname == "t") {
     dist <- fitdist_parameters_t(.data)
-    dist <- dplyr::rename(dist,
-      m = .data$mean,
-      s = .data$sd
-    )
   } else if (distname == "snorm") {
     dist <- fitdist_parameters_skew_normal(.data)
   } else if (distname == "weibull") {
