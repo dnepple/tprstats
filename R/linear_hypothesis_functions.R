@@ -16,7 +16,7 @@
 #' @export
 
 coefTestH <- function(model, conditions){
-  car::linearHypothesis(model, white.adjust = TRUE,c(conditions))
+  car::linearHypothesis(model, hypothesis.matrix = c(conditions), white.adjust = "hc1")
 }
 
 #' Linear Hypothesis Test (Time Series Data)
