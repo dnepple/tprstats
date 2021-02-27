@@ -17,7 +17,7 @@ summaryH <- function(model) {
         lower.tail = FALSE)
 
     sumry$coefficients <- table
-    sumry$fstatistic[1] <- linearHypothesis(CredReg,white.adjust="hc1", c(names(model$coefficients[-1])), c(rep(0, times=length(names(model$coefficients[-1])))))[2,4]
+    sumry$fstatistic[1] <- car::linearHypothesis(CredReg,white.adjust="hc1", c(names(model$coefficients[-1])), c(rep(0, times=length(names(model$coefficients[-1])))))[2,4]
     p <- nrow(table)
     hyp <- cbind(0, diag(p - 1))
 
@@ -44,7 +44,7 @@ summaryHAC <- function(model) {
         lower.tail = FALSE)
 
     sumry$coefficients <- table
-    sumry$fstatistic[1] <- linearHypothesis(CredReg,vcov.=vcovHAC(CredReg), c(names(CredReg$coefficients[-1])), c(rep(0, times=length(names(CredReg$coefficients[-1])))))[2,4]
+    sumry$fstatistic[1] <- car::linearHypothesis(CredReg,vcov.=sandwich::vcovHAC(CredReg), c(names(CredReg$coefficients[-1])), c(rep(0, times=length(names(CredReg$coefficients[-1])))))[2,4]
     p <- nrow(table)
     hyp <- cbind(0, diag(p - 1))
 
