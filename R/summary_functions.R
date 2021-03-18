@@ -44,7 +44,7 @@ summaryHAC <- function(model) {
         lower.tail = FALSE)
 
     sumry$coefficients <- table
-    sumry$fstatistic[1] <- car::linearHypothesis(model,vcov.=sandwich::vcovHAC(CredReg), c(names(model$coefficients[-1])), c(rep(0, times=length(names(model$coefficients[-1])))))[2,3] # f-statistic
+    sumry$fstatistic[1] <- car::linearHypothesis(model,vcov.=sandwich::vcovHAC(model), c(names(model$coefficients[-1])), c(rep(0, times=length(names(model$coefficients[-1])))))[2,3] # f-statistic
     p <- nrow(table)
     hyp <- cbind(0, diag(p - 1))
 
