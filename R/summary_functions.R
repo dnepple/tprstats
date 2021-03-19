@@ -17,6 +17,7 @@ summaryH <- function(model) {
         lower.tail = FALSE)
 
     sumry$coefficients <- table
+    sumry$fstatistic[1] <- car::linearHypothesis(model,white.adjust="hc1", c(names(model$coefficients[-1])), c(rep(0, times=length(names(model$coefficients[-1])))))[2,3] # f-statistic
     p <- nrow(table)
     hyp <- cbind(0, diag(p - 1))
 
@@ -43,6 +44,7 @@ summaryHAC <- function(model) {
         lower.tail = FALSE)
 
     sumry$coefficients <- table
+    sumry$fstatistic[1] <- car::linearHypothesis(model,vcov.=sandwich::vcovHAC(model), c(names(model$coefficients[-1])), c(rep(0, times=length(names(model$coefficients[-1])))))[2,3] # f-statistic
     p <- nrow(table)
     hyp <- cbind(0, diag(p - 1))
 
