@@ -12,7 +12,7 @@
 
 hist_CI <- function(.data, alpha = .1, main = "Histogram", xlab = "Data and (1-alpha)% Confidence Interval", breaks = 20) {
   graphics::hist(.data,
-    breaks = 20, main = main, xlab = xlab,
+    breaks = breaks, main = main, xlab = xlab,
     col = "light blue"
   )
 
