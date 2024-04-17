@@ -1,7 +1,7 @@
 Package: tprstats
 Type: Package
 Title: TSB Statistics Package
-Version: 1.0.0
+Version: 1.0.1
 Author: Dennis Epple, Stephen Epple
 Maintainer: Stephen Epple <sepple@alumni.cmu.edu>
 Description: Statistical methods and applications for students at the Tepper School of Business.
