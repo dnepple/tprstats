@@ -1,17 +1,18 @@
 #' tprstats setup
 #'
-#' Installs additional course packages not already installed as tprstats dependencies. Loads these packages if load = TRUE.
+#' Loads additional packages(tprstats "Suggested" packages) used in the course. Load order matters to prevent naming conflicts.
 #'
 #' @param load Determines whether packages should be loaded. Defaults to TRUE.
 #'
 #' @export
 
 setup <- function(load = TRUE) {
+  # order matters when loading pkgs to prevent naming conflicts
   pkg <- c("EnvStats", "sandwich", "MASS", "pwr", "stargazer", "pwrAB", "ggplot2", "plot3D", "margins", "forecast", "e1071", "rgenoud", "fitdistrplus", "fastDummies", "alabama", "sn", "ramify", "car", "grid", "ivreg", "readxl", "tidyverse", "tprstats")
-  new.pkg <- pkg[!(pkg %in% utils::installed.packages()[, "Package"])]
-  if (length(new.pkg)) {
-    utils::install.packages(new.pkg, dependencies = TRUE)
-  }
+
+  # copies pkg list to package DESCRIPTION as Suggests
+  # sapply(pkg, usethis::use_package, type = "Suggests")
+
   if (load) {
     sapply(pkg, require, character.only = TRUE)
   }
