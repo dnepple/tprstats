@@ -4,10 +4,7 @@
 \alias{setup_tprstats}
 \title{Deprecated Setup for tprstats}
 \usage{
-setup_tprstats(load = TRUE)
-}
-\arguments{
-\item{load}{Indicates of package should be loaded (load = TRUE) or if setup should just check the packages have been installed (load = FALSE)}
+setup_tprstats()
 }
 \description{
 This command is now identical to the tprstats::setup() command. This command just calls tprstats::setup().

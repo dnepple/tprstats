@@ -4,10 +4,7 @@
 \alias{setup}
 \title{tprstats setup}
 \usage{
-setup(load = TRUE)
-}
-\arguments{
-\item{load}{Determines whether packages should be loaded. Defaults to TRUE.}
+setup()
 }
 \description{
 Loads additional packages(tprstats "Suggested" packages) used in the course. Load order matters to prevent naming conflicts.
