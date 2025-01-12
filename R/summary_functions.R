@@ -2,8 +2,8 @@
 #'
 #' This function displays regression results with standard errors adjusted for possible presence of heteroskedasticity using the method developed by White. This method is appropriate for cross-section data.
 #'
-#'@param model The linear regression model.
-#'@export
+#' @param model The linear regression model.
+#' @export
 
 summaryH <- function(model) {
 
@@ -29,8 +29,8 @@ summaryH <- function(model) {
 #'
 #' This function displays regression results with standard errors adjusted for possible presence of heteroskedasticity and autocorrelation using the method developed by Newey and West.  This method is appropriate for time series data.
 #'
-#'@param model The linear regression model.
-#'@export
+#' @param model The linear regression model.
+#' @export
 
 summaryHAC <- function(model) {
 
@@ -54,21 +54,21 @@ summaryHAC <- function(model) {
 #'
 #' Displays results of regression estimated with autoregressive errors. The function will also provide a summary for a regression with both autoregressive and moving average terms.
 #'
-#'@param arima_mod The regression model with autoregressive errors.
+#' @param arima_mod The regression model with autoregressive errors.
 #'
-#'@section Details:
-#'Consider a regression of y on x1, x2, and x3 that is estimated with second-order autoregressive errors as follows: \cr
-#'ar2Reg=with(mydata, Arima(y, xreg=cbind(x1,x2,x3), order=c(2,0,0), include.constant = TRUE))
+#' @section Details:
+#' Consider a regression of y on x1, x2, and x3 that is estimated with second-order autoregressive errors as follows: \cr
+#' ar2Reg=with(mydata, Arima(y, xreg=cbind(x1,x2,x3), order=c(2,0,0), include.constant = TRUE))
 #'
-#'The results of this regression are then reported by the following command: \cr
-#'summaryArima(ar2Reg)
+#' The results of this regression are then reported by the following command: \cr
+#' summaryArima(ar2Reg)
 #'
-#'Consider a regression of y on x1, x2, and x3 that is estimated with both first-order autoregressive and first-order moving average errors as follows: \cr
-#'armaReg=with(mydata, Arima(y, xreg=cbind(x1,x2,x3), order=c(1,0,1), include.constant = TRUE))
+#' Consider a regression of y on x1, x2, and x3 that is estimated with both first-order autoregressive and first-order moving average errors as follows: \cr
+#' armaReg=with(mydata, Arima(y, xreg=cbind(x1,x2,x3), order=c(1,0,1), include.constant = TRUE))
 #'
-#'The results of this regression are then reported by the following command: \cr
-#'summaryArima(armaReg)
-#'@export
+#' The results of this regression are then reported by the following command: \cr
+#' summaryArima(armaReg)
+#' @export
 
 summaryArima <- function(arima_mod) {
     Coefficients <- arima_mod$coef

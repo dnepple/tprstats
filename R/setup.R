@@ -3,8 +3,8 @@
 #' Installs additional course packages not already installed as tprstats dependencies. Loads these packages if load = TRUE.
 #'
 #' @param load Determines whether packages should be loaded. Defaults to TRUE.
-#'
 #' @export
+#' 
 
 setup <- function(load = TRUE) {
   pkg <- c("EnvStats", "sandwich", "MASS", "pwr", "stargazer", "pwrAB", "ggplot2", "plot3D", "margins", "forecast", "e1071", "rgenoud", "fitdistrplus", "fastDummies", "alabama", "sn", "ramify", "car", "grid", "ivreg", "readxl", "tidyverse", "tprstats")
