@@ -25,6 +25,7 @@ coefTestH <- function(model, conditions){
 #'
 #' @param model Regression model being tested.
 #' @param conditions Hypothesis being tested.
+#' 
 #' @section Details:
 #' Let the regression model be: linmod=lm(y~x1+x2+x3+x4)
 #'

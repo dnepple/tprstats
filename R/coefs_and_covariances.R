@@ -3,6 +3,7 @@
 #' Provides coefficients of a regression model and the covariance matrix of the coefficients. The calculation of the covariance matrix corrects for possible presence of heteroskedasticity using the method developed by White. This method is appropriate for cross-section data.
 #'
 #' @param linmod The regression model.
+#' 
 #' @section Details:
 #' Let the regression model be: linmod=lm(y~x1+x2)
 #'
