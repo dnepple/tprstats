@@ -23,7 +23,7 @@ coefDrawH <- function(linmod) {
 
 #' coefDrawHAC
 #'
-#' Tthis function takes a random draw for the coefficients of a time series regression.
+#' This function takes a random draw for the coefficients of a time series regression.
 #'
 #' @param linmod Linear regression model.
 #'
